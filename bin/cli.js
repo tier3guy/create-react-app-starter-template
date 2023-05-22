@@ -15,15 +15,12 @@ const runCommand = (command) => {
 
 const repo_name = process.argv[2];
 
-if (!repo_name) {
-  console.log("\n>> Please provide the name of the project you want to create");
-  process.exit(1);
-}
-
 const gitCloneCommand = `git clone --depth 1 https://github.com/tier3guy/create-react-app-starter-template ${
   repo_name ? repo_name : ""
 }`;
-const npmInstallCommands = `cd ${repo_name} && npm install`;
+const npmInstallCommands = `cd ${
+  repo_name ? repo_name : "create-react-app-starter-template"
+} && npm install`;
 const removingGit = `rm -rf .git && git init`;
 const removeBin = "rm -rf bin";
 
