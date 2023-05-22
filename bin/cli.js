@@ -14,7 +14,15 @@ const runCommand = (command) => {
 };
 
 const repo_name = process.argv[2];
-const gitCloneCommand = `git clone --depth 1 https://github.com/tier3guy/create-react-app-starter-template ${repo_name}`;
+
+if (!repo_name) {
+  console.log("\n>> Please provide the name of the project you want to create");
+  process.exit(1);
+}
+
+const gitCloneCommand = `git clone --depth 1 https://github.com/tier3guy/create-react-app-starter-template ${
+  repo_name ? repo_name : ""
+}`;
 const npmInstallCommands = `cd ${repo_name} && npm install`;
 const removingGit = `rm -rf .git && git init`;
 const removeBin = "rm -rf bin";
@@ -26,8 +34,10 @@ if (!clonned) process.exit(1);
 console.log("\n\n>> Installing dependencies to the project ...");
 const installed = runCommand(npmInstallCommands);
 if (!installed) process.exit(1);
+
 const removed = runCommand(removingGit);
 if (!removed) process.exit(1);
+
 const removedBin = runCommand(removeBin);
 if (!removedBin) process.exit(1);
 
