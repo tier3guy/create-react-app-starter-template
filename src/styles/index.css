@@ -2,8 +2,8 @@
 @import url("./partials/__partials.css");
 
 /* Importing Components CSS */
-@import url("./components/Home.css");
-@import url("./components/Error.css");
+@import url("./pages/Home.css");
+@import url("./pages/Error.css");
 
 /* Overriding Global CSS */
 
