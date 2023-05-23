@@ -2,6 +2,7 @@
 
 const { execSync } = require("child_process");
 
+// Function that runs commands
 const runCommand = (command) => {
   try {
     execSync(`${command}`, { stdio: "inherit" });
@@ -13,26 +14,31 @@ const runCommand = (command) => {
   return true;
 };
 
-const repo_name = process.argv[2];
+const gh_repos = {
+  master: "https://github.com/tier3guy/create-react-app-starter-template",
+  tailwind:
+    "https://github.com/tier3guy/create-react-app-starter-template/tree/tailwind",
+  typscript:
+    "https://github.com/tier3guy/create-react-app-starter-template/tree/typescript",
+  "typscript-tailwind":
+    "https://github.com/tier3guy/create-react-app-starter-template/tree/typescript-tailwind",
+};
 
-const gitCloneCommand = `git clone --depth 1 https://github.com/tier3guy/create-react-app-starter-template ${
-  repo_name ? repo_name : ""
-}`;
-const npmInstallCommands = `cd ${
-  repo_name ? repo_name : "create-react-app-starter-template"
-} && npm install`;
+const repo_name = process.argv[2] ? process.argv[2] : "Frontend";
+const flag = process.argv[3] ? process.argv[3] : "master";
+
+const gitCloneCommand = `git clone --depth 1 ${gh_repos[flag]}  ${repo_name}`;
+const npmInstallCommand = `cd ${repo_name} && npm install`;
 
 console.log("\n>> Creating new application ...");
 const clonned = runCommand(gitCloneCommand);
 if (!clonned) process.exit(1);
 
 console.log("\n\n>> Installing dependencies to the project ...");
-const installed = runCommand(npmInstallCommands);
+const installed = runCommand(npmInstallCommand);
 if (!installed) process.exit(1);
 
 console.log("\n\n>> Congratulations, you project is ready !");
 console.log(
-  `>> run cd ${
-    repo_name ? repo_name : "create-react-app-starter-template"
-  } to go to the project directory and npm run start to start the project`
+  `\n>> run cd ${repo_name} to go to the project directory and npm run start to start the project`
 );
