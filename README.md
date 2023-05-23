@@ -52,6 +52,7 @@ You can also combine Firebase with other options. For example:
 npx create-react-avinash-app ./folder-name typescript-firebase
 ```
 
+
 ## Contribution 🤝
 
 Contributions to the React App Template - Avinash are welcome! If you'd like to contribute to the project, please follow these guidelines:
