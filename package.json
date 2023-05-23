@@ -1,6 +1,6 @@
 {
   "name": "create-react-avinash-app",
-  "version": "0.1.6",
+  "version": "0.2.8",
   "bin": "./bin/cli.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",

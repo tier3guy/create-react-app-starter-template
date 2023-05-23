@@ -16,18 +16,27 @@ const runCommand = (command) => {
 
 const gh_repos = {
   master: "https://github.com/tier3guy/create-react-app-starter-template",
-  tailwind:
-    "https://github.com/tier3guy/create-react-app-starter-template/tree/tailwind",
-  typscript:
-    "https://github.com/tier3guy/create-react-app-starter-template/tree/typescript",
+  tailwind: "https://github.com/tier3guy/create-react-app-starter-template/",
+  typscript: "https://github.com/tier3guy/create-react-app-starter-template/",
   "typscript-tailwind":
-    "https://github.com/tier3guy/create-react-app-starter-template/tree/typescript-tailwind",
+    "https://github.com/tier3guy/create-react-app-starter-template/",
 };
 
-const repo_name = process.argv[2] ? process.argv[2] : "Frontend";
-const flag = process.argv[3] ? process.argv[3] : "master";
+let repo_name = process.argv[2]
+  ? process.argv[2]
+  : "create-react-app-starter-template";
+let flag = process.argv[3] ? process.argv[3] : "master";
 
-const gitCloneCommand = `git clone --depth 1 ${gh_repos[flag]}  ${repo_name}`;
+if (
+  repo_name === "tailwind" ||
+  repo_name === "typscript" ||
+  repo_name === "typescript-tailwind"
+) {
+  flag = repo_name;
+  repo_name = "create-react-app-starter-template";
+}
+
+const gitCloneCommand = `git clone --depth 1 -b ${flag} ${gh_repos[flag]} ${repo_name}`;
 const npmInstallCommand = `cd ${repo_name} && npm install`;
 
 console.log("\n>> Creating new application ...");
